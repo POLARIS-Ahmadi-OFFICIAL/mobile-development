@@ -1,0 +1,98 @@
+# Dependencies
+node_modules/
+
+# Expo
+.expo/
+.expo-shared/
+web-build/
+expo-env.d.ts
+
+# React Native
+android/.gradle/
+android/app/build/
+android/build/
+ios/build/
+ios/Pods/
+
+# Metro
+.metro-health-check*
+
+# Bundler output
+*.bundle
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+.env.*
+
+# TypeScript
+*.tsbuildinfo
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Cache
+.cache/
+.parcel-cache/
+.eslintcache/
+
+# Expo Router
+.expo-router/
+
+# EAS Build
+eas-build/
+eas-build-local/
+
+# IDEs
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Testing
+jest-cache/
+test-results/
+
+# Native generated files (for prebuild projects)
+android/local.properties
+android/captures/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output/
+
+# Firebase
+google-services.json
+GoogleService-Info.plist
+
+# Misc
+*.keystore
+*.jks
+*.p12
+*.mobileprovision
