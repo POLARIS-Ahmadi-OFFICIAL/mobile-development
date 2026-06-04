@@ -1,4 +1,4 @@
-import { apiPath } from "@polaris/shared-types";
+import { apiPath } from "@/lib/api-path";
 
 import { getApiBase } from "@/lib/api-base";
 

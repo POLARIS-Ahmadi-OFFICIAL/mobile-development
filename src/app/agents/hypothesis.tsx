@@ -4,7 +4,7 @@ import { ScrollView, Text, View } from "react-native";
 import { Alert, Button, ChatMessage, StreamlitScreen, TextField } from "@/components/ui";
 import { bubblesToChatMessages } from "@/lib/hypothesis-chat";
 import { streamHypothesisChat, type HypothesisStreamBody } from "@/lib/hypothesis-stream";
-import type { HypothesisBubble } from "@/lib/api-client";
+import type { HypothesisChatBubble } from "@/lib/api-client";
 import { useAccessToken } from "@/lib/use-access-token";
 
 type ChatMsg = { role: "user" | "assistant"; title?: string; text: string };
@@ -20,9 +20,9 @@ export default function HypothesisScreen() {
   const [error, setError] = useState<string | null>(null);
   const streamedKeysRef = useRef<Set<string>>(new Set());
 
-  function appendProgressBubbles(bubbles: HypothesisBubble[] | undefined) {
+  function appendProgressBubbles(bubbles: HypothesisChatBubble[] | undefined) {
     if (!bubbles?.length) return;
-    const fresh: HypothesisBubble[] = [];
+    const fresh: HypothesisChatBubble[] = [];
     for (const b of bubbles) {
       const key = `${b.title ?? ""}:${b.content?.slice(0, 80) ?? ""}`;
       if (streamedKeysRef.current.has(key)) continue;
@@ -32,7 +32,7 @@ export default function HypothesisScreen() {
     const mapped = bubblesToChatMessages(fresh).map((m) => ({
       role: m.role,
       title: m.title,
-      text: m.text ?? m.markdown ?? "",
+      text: m.text,
     }));
     if (mapped.length) setMessages((prev) => [...prev, ...mapped]);
   }
@@ -137,9 +137,9 @@ export default function HypothesisScreen() {
       ) : null}
 
       {stage === "analysis" ? (
-        <Alert variant="success" className="mb-3">
-          Hypothesis ready. Continue in the Experiment agent.
-        </Alert>
+        <View className="mb-3">
+          <Alert variant="success">Hypothesis ready. Continue in the Experiment agent.</Alert>
+        </View>
       ) : null}
 
       <TextField

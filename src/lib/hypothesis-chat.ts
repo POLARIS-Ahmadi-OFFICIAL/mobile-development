@@ -1,11 +1,7 @@
-export type HypothesisBubble = {
-  role: "user" | "assistant";
-  title?: string | null;
-  content: string;
-};
+import type { HypothesisChatBubble } from "@/lib/api-client";
 
 export function bubblesToChatMessages(
-  bubbles: HypothesisBubble[] | undefined,
+  bubbles: HypothesisChatBubble[] | undefined,
   userText?: string,
 ): { role: "user" | "assistant"; title?: string; text: string }[] {
   const out: { role: "user" | "assistant"; title?: string; text: string }[] = [];

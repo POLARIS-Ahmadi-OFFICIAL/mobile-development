@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Text, View } from "react-native";
 
 const variants = {
@@ -17,16 +18,25 @@ const textVariants = {
 export function Alert({
   variant = "info",
   children,
+  className = "",
 }: {
   variant?: keyof typeof variants;
-  children: string;
+  children: ReactNode;
+  className?: string;
 }) {
+  const content =
+    typeof children === "string" || typeof children === "number" ? (
+      <Text className={`text-sm leading-5 ${textVariants[variant]}`}>{children}</Text>
+    ) : (
+      children
+    );
+
   return (
     <View
       accessibilityRole="alert"
-      className={`rounded-[var(--st-radius)] border px-3 py-3 ${variants[variant]}`}
+      className={`rounded-[var(--st-radius)] border px-3 py-3 ${variants[variant]} ${className}`.trim()}
     >
-      <Text className={`text-sm leading-5 ${textVariants[variant]}`}>{children}</Text>
+      {content}
     </View>
   );
 }

@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "dependencies": {
     "@expo/ui": "~56.0.15",
-    "@polaris/shared-types": "file:../shared-types",
     "@supabase/supabase-js": "^2.49.1",
     "expo": "~56.0.8",
     "expo-auth-session": "~56.0.2",
