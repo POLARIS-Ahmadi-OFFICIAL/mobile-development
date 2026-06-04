@@ -1,12 +1,21 @@
 {
   "expo": {
-    "name": "mobile-development",
-    "slug": "mobile-development",
+    "name": "POLARIS",
+    "slug": "polaris-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "mobiledevelopment",
+    "scheme": "polaris",
+    "extra": {
+      "apiUrl": "http://127.0.0.1:8080",
+      "supabaseUrl": "",
+      "supabaseAnonKey": "",
+      "eas": {
+        "projectId": "your-eas-project-id"
+      }
+    },
     "userInterfaceStyle": "automatic",
+    "backgroundColor": "#fafafa",
     "ios": {
       "icon": "./assets/expo.icon"
     },

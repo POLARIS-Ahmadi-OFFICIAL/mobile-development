@@ -1,9 +1,62 @@
-:root {
-  --font-display:
-    Spline Sans, Inter, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji,
-    Segoe UI Symbol, Noto Color Emoji;
-  --font-mono:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
-  --font-rounded: 'SF Pro Rounded', 'Hiragino Maru Gothic ProN', Meiryo, 'MS PGothic', sans-serif;
-  --font-serif: Georgia, 'Times New Roman', serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --st-bg: #ffffff;
+    --st-main: #f5f5f7;
+    --st-sidebar: #f5f5f7;
+    --st-surface: #ffffff;
+    --st-border: rgba(0, 0, 0, 0.08);
+    --st-text: #1d1d1f;
+    --st-muted: #6e6e73;
+    --st-primary: #0071e3;
+    --st-primary-hover: #0077ed;
+    --st-radius: 12px;
+    --st-radius-sm: 8px;
+    --st-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --st-info-bg: #f0f7ff;
+    --st-info-border: #0071e3;
+    --st-info-text: #004499;
+    --st-success-bg: #f0fdf4;
+    --st-success-border: #22c55e;
+    --st-success-text: #166534;
+    --st-warning-bg: #fffbeb;
+    --st-warning-border: #f59e0b;
+    --st-warning-text: #92400e;
+    --st-error-bg: #fef2f2;
+    --st-error-border: #ef4444;
+    --st-error-text: #991b1b;
+    --st-nav-active-bg: #ffffff;
+    --st-nav-active-text: #0071e3;
+    --st-hover: rgba(0, 0, 0, 0.04);
+  }
+
+  .dark {
+    --st-bg: #1c1c1e;
+    --st-main: #000000;
+    --st-sidebar: #161618;
+    --st-surface: #1c1c1e;
+    --st-border: rgba(255, 255, 255, 0.1);
+    --st-text: #f5f5f7;
+    --st-muted: #98989d;
+    --st-primary: #0a84ff;
+    --st-primary-hover: #409cff;
+    --st-info-bg: #1a2332;
+    --st-info-border: #0a84ff;
+    --st-info-text: #64b5f6;
+    --st-success-bg: #14291a;
+    --st-success-border: #30d158;
+    --st-success-text: #86efac;
+    --st-warning-bg: #2a2418;
+    --st-warning-border: #ffd60a;
+    --st-warning-text: #fde68a;
+    --st-error-bg: #2a1818;
+    --st-error-border: #ff453a;
+    --st-error-text: #fca5a5;
+    --st-nav-active-bg: #2c2c2e;
+    --st-nav-active-text: #0a84ff;
+    --st-hover: rgba(255, 255, 255, 0.06);
+  }
 }
