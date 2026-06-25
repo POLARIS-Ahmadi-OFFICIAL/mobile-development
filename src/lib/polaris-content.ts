@@ -16,6 +16,7 @@ export const AGENT_CARDS = [
   { href: "/agents/curve-fitting" as const, icon: "📈", title: "Curve Fitting", subtitle: "Spectral peaks", description: "Peak CSV for downstream ML." },
   { href: "/agents/ml-models" as const, icon: "🤖", title: "ML Models", subtitle: "Explore space", description: "GP and Monte Carlo integration." },
   { href: "/agents/analysis" as const, icon: "🔎", title: "Analysis", subtitle: "Validate results", description: "Compare to your hypothesis." },
+  { href: "/agents/literature" as const, icon: "📚", title: "Literature", subtitle: "Corpus search & jobs", description: "Search mined papers and manage extraction pipeline." },
   { href: "/workflow" as const, icon: "🧭", title: "Workflow", subtitle: "Automation", description: "Demo dataset and auto-ML." },
 ] as const;
 

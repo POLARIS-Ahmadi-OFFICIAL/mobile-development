@@ -187,3 +187,68 @@ export async function clearSessionCache(token: string | null | undefined) {
     token,
   });
 }
+
+// --- Literature Agent ---
+
+export type PaperHit = {
+  paper_slug: string;
+  title: string;
+  doi: string | null;
+  score: number;
+  summary_excerpt: string;
+};
+
+export type LiteratureJobSummary = {
+  job_id: string;
+  stage: string;
+  status: string;
+  created_at: number;
+};
+
+export type LiteratureJobDetail = LiteratureJobSummary & {
+  log_tail: string;
+  return_code: number | null;
+};
+
+export async function fetchLiteratureHealth(token: string | null | undefined) {
+  return apiFetch<{ ok: boolean; active_jobs: string[] }>("/literature/health", { token });
+}
+
+export async function searchLiterature(
+  token: string | null | undefined,
+  query: string,
+  limit = 5,
+) {
+  return apiFetch<PaperHit[]>("/literature/search", {
+    method: "POST",
+    body: JSON.stringify({ query, limit }),
+    token,
+  });
+}
+
+export async function fetchLiteratureJobs(token: string | null | undefined) {
+  return apiFetch<LiteratureJobSummary[]>("/literature/jobs", { token });
+}
+
+export async function fetchLiteratureJobDetail(
+  token: string | null | undefined,
+  jobId: string,
+) {
+  return apiFetch<LiteratureJobDetail>(`/literature/jobs/${jobId}`, { token });
+}
+
+export async function startLiteratureExtraction(
+  token: string | null | undefined,
+  searchQuery: string,
+  maxPapers: number,
+) {
+  return apiFetch<{ job_id: string; status: string }>("/literature/start_stage", {
+    method: "POST",
+    body: JSON.stringify({
+      stage: "extract_batch",
+      search_query: searchQuery,
+      max_papers: maxPapers,
+    }),
+    token,
+  });
+}
