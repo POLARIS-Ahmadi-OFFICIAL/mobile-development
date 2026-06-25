@@ -5,7 +5,7 @@ on:
     tags: ["v*"]
 
 jobs:
-  build:
+  build-ios:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -17,48 +17,48 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
       - run: npm install
-
-      - name: Build iOS (IPA)
-        id: build-ios
+      - name: Build iOS and download
         run: |
-          BUILD_URL=$(eas build --platform ios --profile production --non-interactive --json --no-wait | jq -r '.[0].id')
-          echo "build_id=$BUILD_URL" >> "$GITHUB_OUTPUT"
-
-      - name: Build Android (APK)
-        id: build-android
-        run: |
-          BUILD_URL=$(eas build --platform android --profile production --non-interactive --json --no-wait | jq -r '.[0].id')
-          echo "build_id=$BUILD_URL" >> "$GITHUB_OUTPUT"
-
-      - name: Wait for iOS build and download
-        run: |
-          eas build:wait --id ${{ steps.build-ios.outputs.build_id }}
-          URL=$(eas build:view --id ${{ steps.build-ios.outputs.build_id }} --json | jq -r '.artifacts.buildUrl')
+          URL=$(eas build --platform ios --profile production --non-interactive --wait --json | jq -r '.[0].artifacts.buildUrl')
           curl -L "$URL" -o POLARIS-ios-${{ github.ref_name }}.ipa
           zip POLARIS-ios-${{ github.ref_name }}.zip POLARIS-ios-${{ github.ref_name }}.ipa
-
-      - name: Wait for Android build and download
-        run: |
-          eas build:wait --id ${{ steps.build-android.outputs.build_id }}
-          URL=$(eas build:view --id ${{ steps.build-android.outputs.build_id }} --json | jq -r '.artifacts.buildUrl')
-          curl -L "$URL" -o POLARIS-android-${{ github.ref_name }}.apk
-          zip POLARIS-android-${{ github.ref_name }}.zip POLARIS-android-${{ github.ref_name }}.apk
-
       - uses: actions/upload-artifact@v7
         with:
-          name: polaris-mobile
+          name: polaris-ios
+          path: "*.zip"
+
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+      - uses: expo/expo-github-action@v9
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+      - run: npm install
+      - name: Build Android and download
+        run: |
+          URL=$(eas build --platform android --profile production --non-interactive --wait --json | jq -r '.[0].artifacts.buildUrl')
+          curl -L "$URL" -o POLARIS-android-${{ github.ref_name }}.apk
+          zip POLARIS-android-${{ github.ref_name }}.zip POLARIS-android-${{ github.ref_name }}.apk
+      - uses: actions/upload-artifact@v7
+        with:
+          name: polaris-android
           path: "*.zip"
 
   release:
-    needs: build
+    needs: [build-ios, build-android]
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
       - uses: actions/download-artifact@v8
         with:
-          name: polaris-mobile
           path: artifacts
+          merge-multiple: true
       - uses: softprops/action-gh-release@v3
         with:
           files: artifacts/*.zip
