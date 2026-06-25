@@ -19,7 +19,10 @@
     "backgroundColor": "#fafafa",
     "ios": {
       "icon": "./assets/expo.icon",
-      "bundleIdentifier": "com.polarisahmadi.mobile"
+      "bundleIdentifier": "com.polarisahmadi.mobile",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "package": "com.polarisahmadi.mobile",
