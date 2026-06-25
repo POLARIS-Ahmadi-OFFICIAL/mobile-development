@@ -19,9 +19,9 @@ jobs:
       - run: npm install
       - name: Build iOS and download
         run: |
-          URL=$(eas build --platform ios --profile production --non-interactive --wait --json | jq -r '.[0].artifacts.buildUrl')
-          curl -L "$URL" -o POLARIS-ios-${{ github.ref_name }}.ipa
-          zip POLARIS-ios-${{ github.ref_name }}.zip POLARIS-ios-${{ github.ref_name }}.ipa
+          URL=$(eas build --platform ios --profile simulator --non-interactive --wait --json | jq -r '.[0].artifacts.buildUrl')
+          curl -L "$URL" -o POLARIS-ios-${{ github.ref_name }}.tar.gz
+          zip POLARIS-ios-simulator-${{ github.ref_name }}.zip POLARIS-ios-${{ github.ref_name }}.tar.gz
       - uses: actions/upload-artifact@v7
         with:
           name: polaris-ios
@@ -41,7 +41,7 @@ jobs:
       - run: npm install
       - name: Build Android and download
         run: |
-          URL=$(eas build --platform android --profile production --non-interactive --wait --json | jq -r '.[0].artifacts.buildUrl')
+          URL=$(eas build --platform android --profile preview --non-interactive --wait --json | jq -r '.[0].artifacts.buildUrl')
           curl -L "$URL" -o POLARIS-android-${{ github.ref_name }}.apk
           zip POLARIS-android-${{ github.ref_name }}.zip POLARIS-android-${{ github.ref_name }}.apk
       - uses: actions/upload-artifact@v7

@@ -18,9 +18,11 @@
     "userInterfaceStyle": "automatic",
     "backgroundColor": "#fafafa",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/expo.icon",
+      "bundleIdentifier": "com.polarisahmadi.mobile"
     },
     "android": {
+      "package": "com.polarisahmadi.mobile",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
