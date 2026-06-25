@@ -11,8 +11,9 @@
       "supabaseUrl": "",
       "supabaseAnonKey": "",
       "eas": {
-        "projectId": "your-eas-project-id"
-      }
+        "projectId": "8814e228-55f5-488e-99d5-769d42680c3f"
+      },
+      "router": {}
     },
     "userInterfaceStyle": "automatic",
     "backgroundColor": "#fafafa",
@@ -48,6 +49,7 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "owner": "polaris-ahmadi"
   }
 }
