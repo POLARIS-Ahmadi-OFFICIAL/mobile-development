@@ -171,7 +171,7 @@ export default function HypothesisScreen() {
             label={loading ? "Thinking…" : "Submit question"}
             onPress={() => {
               if (!question.trim()) return;
-              void runChat({ action: "submit_question", question: question.trim() }, question.trim());
+              void runChat({ action: "submit_question", question: question.trim(), reasoning_policy: "auto" }, question.trim());
             }}
           />
         ) : null}

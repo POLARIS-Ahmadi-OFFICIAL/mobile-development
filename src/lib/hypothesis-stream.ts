@@ -9,6 +9,7 @@ export type HypothesisStreamBody = {
   question?: string;
   choice?: string;
   experiment_id?: number;
+  reasoning_policy?: string;
 };
 
 function parseSseChunk(buffer: string): { events: { event: string; data: string }[]; rest: string } {
@@ -35,6 +36,7 @@ export async function streamHypothesisChat(
       step?: string;
       messages?: HypothesisChatBubble[];
       label?: string;
+      reasoning_policy?: string;
     }) => void;
     onComplete?: (res: HypothesisChatResponse) => void;
     onError?: (message: string) => void;
@@ -85,6 +87,7 @@ export async function streamHypothesisChat(
           step: payload.step as string | undefined,
           messages: (payload.messages as HypothesisChatBubble[]) ?? [],
           label: payload.label as string | undefined,
+          reasoning_policy: payload.reasoning_policy as string | undefined,
         });
       }
       if (event === "complete") {
